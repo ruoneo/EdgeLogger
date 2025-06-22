@@ -1,0 +1,189 @@
+# config/config.yaml
+# 网关基础配置
+gateway:
+  gatewayId: 3-3-JC-1F-中控室
+  ipAddress: 172.18.79.100
+  alias: 3-3-JC-1F-中控室
+
+  # 采集轮询策略
+  polling:
+    period: 1
+    heartbeatIntervalMs: 3000
+    collectIntervalMs: 600000
+    changeThreshold: 0.01
+
+# PLC连接配置
+plc:
+  ip: 172.18.79.11     # 需修改
+  port: 102
+  timeout: 10000
+  rack: 0
+  slot: 1
+  plcID: 3-3-11        # 需修改
+
+  # 寄存器映射电表的配置，每个寄存器对应一个电表，设备ID为电表ID
+  registers:
+    - deviceNumber: 1   # 需修改
+      deviceId: 蒙特3-3-20         # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 10      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 2   # 需修改
+      deviceId: GC3-3-2F-7APZ        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 11      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 3   # 需修改
+      deviceId: AHU12        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 12      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 4   # 需修改
+      deviceId: AHU13        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 13      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 5   # 需修改
+      deviceId: AHU14        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 14      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 6   # 需修改
+      deviceId: AHU15        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 15      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 7   # 需修改
+      deviceId: AHU16        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 16      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 8   # 需修改
+      deviceId: GC3-3-2F-6APZ        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 17      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 9   # 需修改
+      deviceId: AHU17        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 18      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 10   # 需修改
+      deviceId: AHU18        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 19      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 11   # 需修改
+      deviceId: AHU19        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 20      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 12   # 需修改
+      deviceId: AHU20        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 21      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 13   # 需修改
+      deviceId: 3-3-2F-APZK02        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 22      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 14   # 需修改
+      deviceId: AHU21        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 23      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 15   # 需修改
+      deviceId: 3-3-2F-APZK01        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 24      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 16   # 需修改
+      deviceId: AHU22        # 需修改
+      alias: three_phase_electric_meter
+      dbNumber: 25      # 需修改
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+# MQTT配置
+mqtt:
+  broker: tcp://10.79.27.187:1886
+  clientId: 3-3-JC-2F-11#PLC   # 需修改
+  qos: 1
+
+  username: mqtt11   # 需修改
+  password: 123123
+  cleanStart: true
+  keepAlive: 10
+  timeout: 300
+  autoReconnect: true
+  msgExample: KFC-CRAZY-THURSDAY-VWO50
+
+  subTopic: device/byd_power/down/
+  subQos: 1
+
+  pubTopic: energy/electric/
+  pubQos: 1
+

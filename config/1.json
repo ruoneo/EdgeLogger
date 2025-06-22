@@ -1,0 +1,921 @@
+{
+  "msgType": "up",
+  "msgId": "d0e64213-eb6b-4ed6-ab92-252cfcf16494",
+  "msgCreateTime": "20250619145825105",
+  "source": {
+    "ipAddress": null,
+    "gatewayId": "3-3-JC-1F-ÖÐ¿ØÊÒ"
+  },
+  "batch": [
+    {
+      "timestamp": "20250619145824881",
+      "device_type": "three_phase_meter",
+      "device_id": "AHU34",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 3274.53,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824893",
+      "device_type": "three_phase_meter",
+      "device_id": "1#³ýÊª»ú",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 178027.27,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824903",
+      "device_type": "three_phase_meter",
+      "device_id": "2#³ýÊª»ú",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 254257.36,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824915",
+      "device_type": "three_phase_meter",
+      "device_id": "3#³ýÊª»ú",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 318374.28,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824925",
+      "device_type": "three_phase_meter",
+      "device_id": "1#CSJ¶þ¼¶¹ñ",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 1778571.4,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824937",
+      "device_type": "three_phase_meter",
+      "device_id": "4#³ýÊª»ú",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 7319.23,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824950",
+      "device_type": "three_phase_meter",
+      "device_id": "AHU35",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 36687.34,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824960",
+      "device_type": "three_phase_meter",
+      "device_id": "5#³ýÊª»ú",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 6787.42,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145824980",
+      "device_type": "three_phase_meter",
+      "device_id": "AHU37",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 5012.59,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    },
+    {
+      "timestamp": "20250619145825004",
+      "device_type": "three_phase_meter",
+      "device_id": "1APZ",
+      "metrics": {
+        "voltage": {
+          "data_type": "float",
+          "unit": "V",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0,
+            "line_ab": 0,
+            "line_bc": 0,
+            "line_ca": 0
+          }
+        },
+        "current": {
+          "data_type": "float",
+          "unit": "A",
+          "value": {
+            "phase_a": 0,
+            "phase_b": 0,
+            "phase_c": 0
+          }
+        },
+        "power": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvar",
+            "value": {
+              "phase_a": 0,
+              "phase_b": 0,
+              "phase_c": 0,
+              "total": 0
+            }
+          },
+          "apparent": {
+            "data_type": "float",
+            "unit": "kVA",
+            "value": {
+              "total": 0
+            }
+          }
+        },
+        "system": [
+          {
+            "data_type": "float",
+            "unit": "",
+            "power_factor": 0
+          },
+          {
+            "data_type": "float",
+            "unit": "Hz",
+            "frequency": 0
+          }
+        ],
+        "energy": {
+          "active": {
+            "data_type": "float",
+            "unit": "kW",
+            "value": {
+              "forward": 1233492.9,
+              "reverse": 0
+            }
+          },
+          "reactive": {
+            "data_type": "float",
+            "unit": "kvarh",
+            "value": {
+              "forward": 0,
+              "reverse": 0
+            }
+          }
+        }
+      },
+      "status": {
+        "device_status": 0,
+        "data_quality": 100
+      }
+    }
+  ]
+}

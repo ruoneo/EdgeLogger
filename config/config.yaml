@@ -1,0 +1,1357 @@
+# config/config.yaml
+# 基础配置
+general:
+  gatewayId: 3-3-JC-1F-中控室
+  ipAddress: 172.18.79.100
+  alias: 3-3#检测车间1楼西中控室
+
+  # 采集轮询策略
+  polling:
+    keepAliveIntervalMs: 3000
+    collectIntervalMs: 600000    # 此配置文件及软件只适用于采集频率低于3min/次的情况.
+
+  # 持久化策略
+  db:
+    url: jdbc:mysql://172.18.79.100:3306/powerdb
+    user: collector
+    password: collector
+
+# MQTT配置
+mqtt:
+  broker: tcp://localhost:1883
+  clientId: 3-3-JC-1F-1#PLC
+  qos: 1
+
+  username: mqtt1
+  password: 123123
+  cleanStart: true
+  keepAlive: 10
+  timeout: 300
+  autoReconnect: true
+  msgExample: KFC-CRAZY-THURSDAY-VWO50
+
+  subTopic: device/byd_power/down/
+  subQos: 1
+
+  pubTopic: energy/electric/
+  pubQos: 1
+
+# PLC连接配置
+plc:
+  - ip: 172.18.79.1
+    port: 102
+    timeout: 5000
+    rack: 0
+    slot: 1
+    plcID: 3-3-1
+    registers:
+      - deviceNumber: 1
+        deviceId: GC-3-3-1F-JC-01     # 寄存器映射电表的配置，每个寄存器对应一个电表，设备ID为电表ID
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: GC-3-3-1F-JC-02
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: GC-3-3-1F-JC-03
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4
+        deviceId: GC-3-3-1F-JC-04
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5
+        deviceId: GC-3-3-1F-JC-06
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6
+        deviceId: GC-3-3-1F-JC-05
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7
+        deviceId: GC-3-3-1F-JC-08
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8
+        deviceId: GC-3-3-1F-JC-07
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: GC-3-3-1F-JC-11
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10
+        deviceId: GC-3-3-1F-JC-10
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11
+        deviceId: GC-3-3-1F-JC-09
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12
+        deviceId: GC-3-3-1F-JC-12
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.2
+    port: 102
+    timeout: 5000
+    rack: 0
+    slot: 1
+    plcID: 3-3-2
+    registers:
+      - deviceNumber: 1
+        deviceId: GC-3-3-1F-JC-46    # 寄存器映射电表的配置，每个寄存器对应一个电表，设备ID为电表ID
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: GC-3-3-1F-JC-14
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: GC-3-3-1F-JC-13
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4
+        deviceId: GC-3-3-1F-JC-15
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5
+        deviceId: GC-3-3-1F-JC-16
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6
+        deviceId: GC-3-3-1F-JC-17
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7
+        deviceId: GC-3-3-1F-JC-19
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8
+        deviceId: GC-3-3-1F-JC-21
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: GC-3-3-1F-JC-18
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10
+        deviceId: GC-3-3-1F-JC-20
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.3
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-3
+    registers:
+      - deviceNumber: 1
+        deviceId: GC-3-3-1F-JC-44
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: GC-3-3-1F-JC-45
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: GC-3-3-1F-JC-29
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4
+        deviceId: GC-3-3-1F-JC-22
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5
+        deviceId: GC-3-3-1F-JC-24
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6
+        deviceId: GC-3-3-1F-JC-25
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7
+        deviceId: GC-3-3-1F-JC-26
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8
+        deviceId: GC-3-3-1F-JC-27
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: GC-3-3-1F-JC-28
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10
+        deviceId: GC-3-3-1F-JC-31
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11
+        deviceId: GC-3-3-1F-JC-32
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12
+        deviceId: GC-3-3-1F-JC-33
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 13
+        deviceId: GC-3-3-1F-JC-34
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB22.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 14
+        deviceId: GC-3-3-1F-JC-30
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB23.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 15
+        deviceId: GC-3-3-1F-JC-23
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB24.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 16
+        deviceId: GC-3-3-1F-JC-西废气
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB25.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.4
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-4
+    registers:
+      - deviceNumber: 1
+        deviceId: GC-3-3-1F-JC-36
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: GC-3-3-1F-JC-35
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: GC-3-3-1F-JC-41
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4
+        deviceId: GC-3-3-1F-JC-42
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5
+        deviceId: GC-3-3-1F-JC-43
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6
+        deviceId: GC-3-3-1F-JC-40
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7
+        deviceId: GC-3-3-1F-JC-39
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8
+        deviceId: GC-3-3-1F-JC-38
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: GC-3-3-1F-JC-37
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10
+        deviceId: GC-3-3-1F-JC-nanfeiqi
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.5
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-5
+    registers:
+      - deviceNumber: 1
+        deviceId: AHU34
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: 1#除湿机
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: 2#除湿机
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4
+        deviceId: 3#除湿机
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5
+        deviceId: 1#CSJ二级柜
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6
+        deviceId: 4#除湿机
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7
+        deviceId: AHU35
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8
+        deviceId: 5#除湿机
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: AHU36
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10
+        deviceId: AHU37
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11
+        deviceId: AHU38
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12
+        deviceId: 1APZ
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 13
+        deviceId: AHU39
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB22.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 14
+        deviceId: AHU40
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB23.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 15
+        deviceId: AHU106
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB24.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.6
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-6
+    registers:
+      - deviceNumber: 1
+        deviceId: AHU41
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: AHU42
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: AHU43
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4
+        deviceId: AHU44
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5
+        deviceId: AHU107
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6
+        deviceId: AHU108
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7
+        deviceId: AHU45
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8
+        deviceId: 2APZ1
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: 2APZ2
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10
+        deviceId: AHU46
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11
+        deviceId: 2#CSJ-02
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12
+        deviceId: AHU47
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 13
+        deviceId: AHU48
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB22.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 14
+        deviceId: 3-3-6捷瑞除湿机
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB23.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 15
+        deviceId: AHU49
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB24.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 16
+        deviceId: AHU50
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB25.DBD92:REAL[1]"
+            dataType: float
+
+
+  - ip: 172.18.79.7
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-7
+    registers:
+      - deviceNumber: 1   
+        deviceId: 蒙特3-3-7        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2   
+        deviceId: 捷瑞3-3-8        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3   
+        deviceId: 蒙特3-3-9        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4   
+        deviceId: 3APZ1        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5   
+        deviceId: 3APZ2        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6   
+        deviceId: AHU51        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7   
+        deviceId: AHU52        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8   
+        deviceId: AHU53        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: AHU54        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10   
+        deviceId: AHU55        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11  
+        deviceId: 3-3-2F-JC-02        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12   
+        deviceId: AHU56        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 13   
+        deviceId: AHU57        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB22.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 14   
+        deviceId: 3-3-2F-JC-03        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB23.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.8     
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-8
+    registers:
+      - deviceNumber: 1
+        deviceId: 捷瑞3-3-10
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: 捷瑞3-3-11
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: 蒙特3-3-12
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4
+        deviceId: 捷瑞3-3-13
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5
+        deviceId: 3-3-2F-JC-01
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6
+        deviceId: 4APZ
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7
+        deviceId: AHU61
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8
+        deviceId: AHU60
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9
+        deviceId: AHU59
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10
+        deviceId: AHU58
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.9     
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-9        
+    registers:
+      - deviceNumber: 1   
+        deviceId: 捷瑞3-3-14        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 2   
+        deviceId: AHU62        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 3   
+        deviceId: AHU105        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 4   
+        deviceId: 蒙特3-3-15        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 5   
+        deviceId: 3-3-2F-4#CSJ-04        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 6   
+        deviceId: 蒙特3-3-16        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 7   
+        deviceId: GC3-3-8APZ2        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 8   
+        deviceId: 蒙特3-3-17        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 9   
+        deviceId: AHU1        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+  
+      - deviceNumber: 10   
+        deviceId: AHU2        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.10     
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-10        
+    registers:
+      - deviceNumber: 1   
+        deviceId: 蒙特3-3-18        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2   
+        deviceId: AHU3        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3   
+        deviceId: AHU4        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4   
+        deviceId: AHU5        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5   
+        deviceId: AHU6        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6   
+        deviceId: AHU7        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7   
+        deviceId: AHU8        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8   
+        deviceId: GC3-3-8APZ        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9   
+        deviceId: AHU9        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10   
+        deviceId: AHU10        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11   
+        deviceId: AHU11        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12   
+        deviceId: 蒙特3-3-19        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+
+  - ip: 172.18.79.11
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-11
+    registers:
+      - deviceNumber: 1   
+        deviceId: 蒙特3-3-20         
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2   
+        deviceId: GC3-3-2F-7APZ        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3   
+        deviceId: AHU12        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4   
+        deviceId: AHU13        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5   
+        deviceId: AHU14        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6   
+        deviceId: AHU15        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7   
+        deviceId: AHU16        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8   
+        deviceId: GC3-3-2F-6APZ        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9   
+        deviceId: AHU17        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10   
+        deviceId: AHU18        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11   
+        deviceId: AHU19        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12   
+        deviceId: AHU20        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 13   
+        deviceId: 3-3-2F-APZK02        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB22.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 14   
+        deviceId: AHU21        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB23.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 15   
+        deviceId: 3-3-2F-APZK01        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB24.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 16   
+        deviceId: AHU22        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB25.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 172.18.79.12     
+    port: 102
+    timeout: 10000
+    rack: 0
+    slot: 1
+    plcID: 3-3-12        
+    registers:
+      - deviceNumber: 1   
+        deviceId: AHU23        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2   
+        deviceId: GC3-3-2F-5APZ        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3   
+        deviceId: AHU24        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 4   
+        deviceId: AHU25        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB13.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 5   
+        deviceId: AHU26        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB14.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 6   
+        deviceId: AHU27        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB15.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 7   
+        deviceId: AHU28        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB16.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 8   
+        deviceId: 蒙特3-3-21        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB17.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 9   
+        deviceId: AHU29        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB18.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 10   
+        deviceId: AHU30        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB19.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 11   
+        deviceId: AHU31        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB20.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 12   
+        deviceId: AHU32        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB21.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 13   
+        deviceId: AHU33        
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB22.DBD92:REAL[1]"
+            dataType: float

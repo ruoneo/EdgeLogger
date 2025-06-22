@@ -1,0 +1,153 @@
+# config/config.yaml
+# 网关基础配置
+gateway:
+  gatewayId: 3-3-JC-1F-中控室
+  ipAddress: 172.18.79.100
+  alias: 3-3-JC-1F-中控室
+
+  # 采集轮询策略
+  polling:
+    period: 1
+    heartbeatIntervalMs: 3000
+    collectIntervalMs: 600000
+    changeThreshold: 0.01
+
+# PLC连接配置
+plc:
+  ip: 172.18.79.1
+  port: 102
+  timeout: 5000
+  rack: 0
+  slot: 1
+  plcID: 3-3-1
+
+  # 寄存器映射电表的配置，每个寄存器对应一个电表，设备ID为电表ID
+  registers:
+    - deviceNumber: 1
+      deviceId: GC-3-3-1F-JC-01
+      alias: three_phase_electric_meter
+      dbNumber: 10
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 2
+      deviceId: GC-3-3-1F-JC-02
+      alias: three_phase_electric_meter
+      dbNumber: 11
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 3
+      deviceId: GC-3-3-1F-JC-03
+      alias: three_phase_electric_meter
+      dbNumber: 12
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 4
+      deviceId: GC-3-3-1F-JC-04
+      alias: three_phase_electric_meter
+      dbNumber: 13
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 5
+      deviceId: GC-3-3-1F-JC-06
+      alias: three_phase_electric_meter
+      dbNumber: 14
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 6
+      deviceId: GC-3-3-1F-JC-05
+      alias: three_phase_electric_meter
+      dbNumber: 15
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 7
+      deviceId: GC-3-3-1F-JC-08
+      alias: three_phase_electric_meter
+      dbNumber: 16
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 8
+      deviceId: GC-3-3-1F-JC-07
+      alias: three_phase_electric_meter
+      dbNumber: 17
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 9
+      deviceId: GC-3-3-1F-JC-11
+      alias: three_phase_electric_meter
+      dbNumber: 18
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 10
+      deviceId: GC-3-3-1F-JC-10
+      alias: three_phase_electric_meter
+      dbNumber: 19
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 11
+      deviceId: GC-3-3-1F-JC-09
+      alias: three_phase_electric_meter
+      dbNumber: 20
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+    - deviceNumber: 12
+      deviceId: GC-3-3-1F-JC-12
+      alias: three_phase_electric_meter
+      dbNumber: 21
+      startOffset: 92
+      endOffset: 96
+      length: 4
+      dataType: float
+
+# MQTT配置
+mqtt:
+  broker: tcp://10.79.27.187:1886
+  clientId: 3-3-JC-1F-1#PLC
+  qos: 1
+
+  username: mqtt1
+  password: 123123
+  cleanStart: true
+  keepAlive: 10
+  timeout: 300
+  autoReconnect: true
+  msgExample: KFC-CRAZY-THURSDAY-VWO50
+
+  subTopic: device/byd_power/down/
+  subQos: 1
+
+  pubTopic: energy/electric/
+  pubQos: 1
+
