@@ -25,6 +25,8 @@ public class MqttClient {
         options.setAutomaticReconnect(autoReconnect);// 是否自动重连
 
         mqttSession.connect(options).waitForCompletion();
+
+        LOGGER.info("MQTT会话初始化完成 [Broker：{}，ClientID：{}]", broker, clientId);
     }
 
     public void disconnect() throws MqttException {

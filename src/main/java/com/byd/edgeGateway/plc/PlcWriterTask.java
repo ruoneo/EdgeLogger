@@ -1,6 +1,7 @@
 package com.byd.edgeGateway.plc;
 
 import com.byd.edgeGateway.config.PlcConfig;
+import com.byd.edgeGateway.persistence.PowerDataInserter;
 import com.byd.edgeGateway.utils.MapCompare;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
@@ -8,20 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 import static com.byd.edgeGateway.config.YamlConfig.blockingQueue;
 
-// PLC读取任务（每个配置独立运行）
-public class PlcReaderTask implements Runnable {
+// PLC写任务（每个配置独立运行）
+public class PlcWriterTask implements Runnable {
     public static final Logger logger = LoggerFactory.getLogger("PlcReader.class");
 
     private final PlcConfig plcConfig;
-    CountDownLatch latch;
 
-    public PlcReaderTask(PlcConfig plcConfig, CountDownLatch latch) {
+    public PlcWriterTask(PlcConfig plcConfig) {
         this.plcConfig = plcConfig;
-        this.latch = latch;
     }
 
     @Override
@@ -33,21 +31,22 @@ public class PlcReaderTask implements Runnable {
             // 一个PLC采集完成，值放入
             Map<String, DataTimeEntry> registerValueDiff = MapCompare.isEquals(registerValue, plcConfig.getLastRegisterValue());
             MapDifference<String, DataTimeEntry> mapDifference = Maps.difference(registerValueDiff, registerValue);
-//            PowerDataInserter.putPowerData(mapDifference.entriesOnlyOnRight(),false);
+            PowerDataInserter.putPowerData(mapDifference.entriesOnlyOnRight(),false);
             if (registerValueDiff.isEmpty()) {
-                logger.info("PlcID:{} 数据无变化，跳过队列存储", plcConfig.getPlcID());
+                logger.info("PlcID:{} 数据无变化，跳过队列存储",plcConfig.getPlcID());
             } else {
                 // 把registerValue写入数据库
-//                PowerDataInserter.putPowerData(registerValueDiff,true);
+                PowerDataInserter.putPowerData(registerValueDiff,true);
                 blockingQueue.put(registerValueDiff);
                 plcConfig.setLastRegisterValue(registerValue);
-                logger.info("PlcID:{} 差异数据已存入队列", plcConfig.getPlcID());
+                logger.info("PlcID:{} 差异数据已存入队列",plcConfig.getPlcID());
             }
         } catch (Exception e) {
             logger.info("[{}] PLC读取被中断", threadName);
             throw new RuntimeException(e);
         } finally {
-            this.latch.countDown();
+            // 清理资源（实际需要关闭PLC连接）
+            logger.info("[{}] 关闭PLC连接: {}", threadName, plcConfig.getIp());
         }
     }
 }

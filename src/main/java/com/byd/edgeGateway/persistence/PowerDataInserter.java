@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.Map;
-import java.util.LinkedHashMap;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -92,25 +91,5 @@ public class PowerDataInserter {
         } catch (SQLException e) {
             LOGGER.debug("数据库操作错误: {}", e.getMessage());
         }
-    }
-
-
-    // 测试用例
-//    @Test
-    public void test() {
-        Map<String, DataTimeEntry> input = new LinkedHashMap<>();
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
-
-        input.put("GC-3-3-1F-JC-01", new DataTimeEntry(new double[]{
-                220.5f, 219.8f, 221.2f, 380.4f, 381.0f, 379.8f, // 电压6个
-                15.3f, 14.9f, 15.1f,                          // 电流3个
-                3.3f, 3.1f, 3.2f, 9.6f,                      // 有功功率4个
-                1.2f, 1.1f, 1.3f, 3.6f,                      // 无功功率4个
-                10.2f,                                       // 视在功率1个
-                0.92f, 49.98f,                              // 系统参数2个
-                56782.1323f, 0.0f, 800.2f, 45.3f            // 电能4个
-        }, timestamp));
-
-        putPowerData(input,true);
     }
 }

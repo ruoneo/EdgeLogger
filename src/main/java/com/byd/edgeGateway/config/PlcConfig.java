@@ -1,6 +1,10 @@
 package com.byd.edgeGateway.config;
 
+import com.byd.edgeGateway.plc.DataTimeEntry;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class PlcConfig {
     private String ip;
@@ -9,7 +13,9 @@ public class PlcConfig {
     private int rack;
     private int slot;
     private String plcID;
-    List<RegisterConfig> registerConfigs;
+    private List<RegisterConfig> registerConfigs;
+
+    private Map<String, DataTimeEntry> lastRegisterValue = Collections.emptyMap();
 
     public String getIp() {
         return ip;
@@ -65,6 +71,14 @@ public class PlcConfig {
 
     public void setPlcID(String plcID) {
         this.plcID = plcID;
+    }
+
+    public Map<String, DataTimeEntry> getLastRegisterValue() {
+        return lastRegisterValue;
+    }
+
+    public void setLastRegisterValue(Map<String, DataTimeEntry> lastRegisterValue) {
+        this.lastRegisterValue = lastRegisterValue;
     }
 }
 

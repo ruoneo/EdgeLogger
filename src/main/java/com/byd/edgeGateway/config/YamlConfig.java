@@ -25,7 +25,7 @@ public class YamlConfig {
     public MqttConfig mqttConfig = new MqttConfig();
     public final ArrayList<PlcConfig> plcConfigs = new ArrayList<>();
     // 初始化缓冲区，容量为50
-    public final BlockingQueue<Map<String, DataTimeEntry>> blockingQueue = new ArrayBlockingQueue<>(50);
+    public static final BlockingQueue<Map<String, DataTimeEntry>> blockingQueue = new ArrayBlockingQueue<>(50);
 
     private long lastReloadTime = 0;
 

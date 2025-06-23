@@ -46,6 +46,7 @@ public class MqttSubscriber {
     }
 
     public void subscribe(String topic, int subQos) throws MqttException {
+        LOGGER.info("订阅主题: {} Qos: {}", topic, subQos);
         mqttSession.subscribe(topic, subQos);
     }
 
