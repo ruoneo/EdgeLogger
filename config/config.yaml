@@ -30,7 +30,7 @@ mqtt:
   autoReconnect: true
   msgExample: KFC-CRAZY-THURSDAY-VWO50
 
-  subTopic: device/byd_power/down/
+  subTopic: device/power/down/
   subQos: 1
 
   pubTopic: energy/electric/
