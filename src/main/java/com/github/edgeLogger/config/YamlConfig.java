@@ -168,30 +168,5 @@ public class YamlConfig {
     public long getLastReloadTime() {
         return lastReloadTime;
     }
-
-    public void setLastReloadTime(long lastReloadTime) {
-        this.lastReloadTime = lastReloadTime;
-    }
-
-    public GeneralConfig getGeneralConfig() {
-        return generalConfig;
-    }
-
-    public void setGeneralConfig(GeneralConfig generalConfig) {
-        this.generalConfig = generalConfig;
-    }
-
-    public MqttConfig getMqttConfig() {
-        return mqttConfig;
-    }
-
-    public void setMqttConfig(MqttConfig mqttConfig) {
-        this.mqttConfig = mqttConfig;
-    }
-
-    public ArrayList<PlcConfig> getPlcConfigs() {
-        return plcConfigs;
-    }
-
 }
 
