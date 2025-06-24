@@ -36,7 +36,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.byd.edgeGateway.MainApp</mainClass>
+                                    <mainClass>com.github.edgeLogger.MainApp</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -64,7 +64,7 @@
                             <outfile>exe/bin/${project.name}-3-3-12.exe</outfile>
                             <jar>${project.build.directory}/${project.name}-jar-with-dependencies.jar</jar>
                             <classPath>
-                                <mainClass>com.byd.edgeGateway.MainApp</mainClass>
+                                <mainClass>com.github.edgeLogger.MainApp</mainClass>
                             </classPath>
                             <dontWrapJar>false</dontWrapJar>
                             <jre>
