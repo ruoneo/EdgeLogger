@@ -37,7 +37,7 @@ public class PlcWriterTask implements Runnable {
             } else {
                 // 把registerValue写入数据库
                 PowerDataInserter.putPowerData(registerValueDiff,true);
-                blockingQueue.put(registerValueDiff);
+//                blockingQueue.put(registerValueDiff);
                 plcConfig.setLastRegisterValue(registerValue);
                 logger.info("PlcID:{} 差异数据已存入队列",plcConfig.getPlcID());
             }

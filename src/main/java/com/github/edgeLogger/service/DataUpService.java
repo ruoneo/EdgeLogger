@@ -1,11 +1,11 @@
 package com.github.edgeLogger.service;
 
-import com.byd.edgeGateway.config.*;
 import com.github.edgeLogger.config.YamlConfig;
+import com.github.edgeLogger.config.*;
 import com.github.edgeLogger.mqtt.MqttClient;
 import com.github.edgeLogger.mqtt.MqttPublisher;
 import com.github.edgeLogger.mqtt.MqttSubscriber;
-import com.github.edgeLogger.plc.DataTimeEntry;
+import com.github.edgeLogger.plc.DataWithMetadata;
 import com.github.edgeLogger.plc.PlcReaderTask;
 import com.github.edgeLogger.utils.JsonConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -118,10 +118,10 @@ public class DataUpService {
         Thread consumerThread = new Thread(() -> {
             while (consumerRunning.get()) {
                 try {
+                    DataWithMetadata dataWithMetadata = blockingQueue.take();
                     // 从缓冲区取出数据，阻塞直到有数据可用
-                    Map<String, DataTimeEntry> stringDataTimeEntryMap = blockingQueue.take();
                     long start = System.currentTimeMillis();
-                    String packedData = packData(stringDataTimeEntryMap);
+                    String packedData = packData(dataWithMetadata);
                     // 发给broker
                     mqttPublisher.publish(packedData.getBytes(), yamlConfig.mqttConfig.getPubTopic(), yamlConfig.mqttConfig.getPubQos());
                     long duration = System.currentTimeMillis() - start;
@@ -143,13 +143,13 @@ public class DataUpService {
      * @param input
      * @return 封装格式如下:
      */
-    public String packData(Map<String, DataTimeEntry> input) throws JsonProcessingException {
+    public String packData(DataWithMetadata input) throws JsonProcessingException {
         if (input == null) {
             throw new IllegalArgumentException("Map cannot be null");
         }
 
         // 构建目标json数据结构
-        Map<String, Object> jsonResult = JsonConverter.convert(input, yamlConfig.generalConfig.getGatewayId(), yamlConfig.generalConfig.getIp());
+        Map<String, Object> jsonResult = JsonConverter.convert(input.data(), input.metadata(), yamlConfig.generalConfig.getGatewayId(), yamlConfig.generalConfig.getIp());
 
         // JSON序列化输出
         return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(jsonResult);

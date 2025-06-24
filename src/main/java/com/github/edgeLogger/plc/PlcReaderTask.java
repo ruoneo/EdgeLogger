@@ -1,6 +1,7 @@
 package com.github.edgeLogger.plc;
 
 import com.github.edgeLogger.config.PlcConfig;
+import com.github.edgeLogger.persistence.PowerDataInserter;
 import com.github.edgeLogger.utils.MapCompare;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
@@ -33,13 +34,13 @@ public class PlcReaderTask implements Runnable {
             // 一个PLC采集完成，值放入
             Map<String, DataTimeEntry> registerValueDiff = MapCompare.isEquals(registerValue, plcConfig.getLastRegisterValue());
             MapDifference<String, DataTimeEntry> mapDifference = Maps.difference(registerValueDiff, registerValue);
-//            PowerDataInserter.putPowerData(mapDifference.entriesOnlyOnRight(),false);
+            PowerDataInserter.putPowerData(mapDifference.entriesOnlyOnRight(), false);
             if (registerValueDiff.isEmpty()) {
                 logger.info("PlcID:{} 数据无变化，跳过队列存储", plcConfig.getPlcID());
             } else {
                 // 把registerValue写入数据库
-//                PowerDataInserter.putPowerData(registerValueDiff,true);
-                blockingQueue.put(registerValueDiff);
+                PowerDataInserter.putPowerData(registerValueDiff, true);
+                putQueue(registerValueDiff);
                 plcConfig.setLastRegisterValue(registerValue);
                 logger.info("PlcID:{} 差异数据已存入队列", plcConfig.getPlcID());
             }
@@ -49,5 +50,9 @@ public class PlcReaderTask implements Runnable {
         } finally {
             this.latch.countDown();
         }
+    }
+
+    private void putQueue(Map<String, DataTimeEntry> registerValueDiff) throws InterruptedException {
+        blockingQueue.put(new DataWithMetadata(registerValueDiff, Map.of("plcID", plcConfig.getPlcID(),"ip", plcConfig.getIp())));
     }
 }

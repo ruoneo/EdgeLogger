@@ -4,14 +4,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class DataTimeEntry {
-    public byte[] bytes = new byte[96];
     public double[] doubles;
     public String timestamp;
-
-    public DataTimeEntry(byte[] bytes, String timestamp) {
-        System.arraycopy(bytes, 0, this.bytes, 80, 4);
-        this.timestamp = timestamp;
-    }
 
     public DataTimeEntry(double[] doubles, String timestamp) {
         this.doubles = doubles;

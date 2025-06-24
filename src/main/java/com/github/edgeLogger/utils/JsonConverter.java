@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JsonConverter {
-    public static Map<String, Object> convert(Map<String, DataTimeEntry> stringDataEntryMap,String gatewayId,String ipAddress) {
+    public static Map<String, Object> convert(Map<String, DataTimeEntry> stringDataEntryMap, Map<String, Object> metadata, String gatewayId, String ipAddress) {
         Map<String, Object> root = new LinkedHashMap<>();
 
         // 固定头部信息
@@ -17,9 +17,10 @@ public class JsonConverter {
         root.put("msgCreateTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")));
 
         // 构建固定源信息
-        Map<String, String> source = new LinkedHashMap<>();
+        Map<String, Object> source = new LinkedHashMap<>();
         source.put("ipAddress", ipAddress);
         source.put("gatewayId", gatewayId);
+        source.put("plc", Map.of("plcID", String.valueOf(metadata.get("plcID")), "ip", String.valueOf(metadata.get("ip"))));
 
         root.put("source", source);
 

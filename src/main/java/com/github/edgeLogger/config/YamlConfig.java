@@ -1,6 +1,6 @@
 package com.github.edgeLogger.config;
 
-import com.github.edgeLogger.plc.DataTimeEntry;
+import com.github.edgeLogger.plc.DataWithMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -25,7 +25,7 @@ public class YamlConfig {
     public MqttConfig mqttConfig = new MqttConfig();
     public final ArrayList<PlcConfig> plcConfigs = new ArrayList<>();
     // 初始化缓冲区，容量为50
-    public static final BlockingQueue<Map<String, DataTimeEntry>> blockingQueue = new ArrayBlockingQueue<>(50);
+    public static final BlockingQueue<DataWithMetadata> blockingQueue = new ArrayBlockingQueue<>(50);
 
     private long lastReloadTime = 0;
 
