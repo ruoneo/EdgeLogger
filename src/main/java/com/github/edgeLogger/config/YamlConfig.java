@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class YamlConfig {
     public static final Logger logger = LoggerFactory.getLogger("YamlConfigLoader.class");
