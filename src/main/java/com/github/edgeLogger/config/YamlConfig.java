@@ -61,14 +61,14 @@ public class YamlConfig {
     }
 
     public static GeneralConfig getGeneralConfig(){
-        return generalConfig;
+        return YamlConfig.generalConfig;
     }
 
     private void readGeneralConfig(Map<String, Object> generalConfigMap) {
         // 加载基础配置
-        this.generalConfig.setGatewayId((String) generalConfigMap.get("gatewayId"));
-        this.generalConfig.setIp((String) generalConfigMap.get("ipAddress"));
-        this.generalConfig.setAlias((String) generalConfigMap.get("alias"));
+        YamlConfig.generalConfig.setGatewayId((String) generalConfigMap.get("gatewayId"));
+        YamlConfig.generalConfig.setIp((String) generalConfigMap.get("ipAddress"));
+        YamlConfig.generalConfig.setAlias((String) generalConfigMap.get("alias"));
         // 加载采集策略配置
         @SuppressWarnings("unchecked")
         Map<String, Object> pollingConfigMap = (Map<String, Object>) generalConfigMap.get("polling");
@@ -89,7 +89,7 @@ public class YamlConfig {
             plcConfig.setSlot((Integer) ((LinkedHashMap<?, ?>) plc).get("slot"));
             plcConfig.setPlcID((String) ((LinkedHashMap<?, ?>) plc).get("plcID"));
             plcConfig.setRegisterConfigs(readRegisterConfigs(plc));
-            this.plcConfigs.add(plcConfig);
+            YamlConfig.plcConfigs.add(plcConfig);
         }
 
     }
@@ -126,36 +126,36 @@ public class YamlConfig {
 
     private void readMqttConfig(Map<String, Object> mqttConfigMap) {
         // MTQQ客户端配置
-        this.mqttConfig.setBroker((String) mqttConfigMap.get("broker"));
-        this.mqttConfig.setClientId((String) mqttConfigMap.get("clientId"));
-        this.mqttConfig.setQos((Integer) mqttConfigMap.get("qos"));
+        YamlConfig.mqttConfig.setBroker((String) mqttConfigMap.get("broker"));
+        YamlConfig.mqttConfig.setClientId((String) mqttConfigMap.get("clientId"));
+        YamlConfig.mqttConfig.setQos((Integer) mqttConfigMap.get("qos"));
         // connect 配置
-        this.mqttConfig.setUsername((String) mqttConfigMap.get("username"));
-        this.mqttConfig.setPassword(mqttConfigMap.get("password").toString());
-        this.mqttConfig.setCleanStart((Boolean) mqttConfigMap.get("cleanStart"));
-        this.mqttConfig.setKeepAlive((Integer) mqttConfigMap.get("keepAlive"));
-        this.mqttConfig.setTimeout((Integer) mqttConfigMap.get("timeout"));
-        this.mqttConfig.setAutoReconnect((Boolean) mqttConfigMap.get("autoReconnect"));
-        this.mqttConfig.setMsgExample((String) mqttConfigMap.get("msgExample"));
+        YamlConfig.mqttConfig.setUsername((String) mqttConfigMap.get("username"));
+        YamlConfig.mqttConfig.setPassword(mqttConfigMap.get("password").toString());
+        YamlConfig.mqttConfig.setCleanStart((Boolean) mqttConfigMap.get("cleanStart"));
+        YamlConfig.mqttConfig.setKeepAlive((Integer) mqttConfigMap.get("keepAlive"));
+        YamlConfig.mqttConfig.setTimeout((Integer) mqttConfigMap.get("timeout"));
+        YamlConfig.mqttConfig.setAutoReconnect((Boolean) mqttConfigMap.get("autoReconnect"));
+        YamlConfig.mqttConfig.setMsgExample((String) mqttConfigMap.get("msgExample"));
         // 订阅参数
-        this.mqttConfig.setSubTopic((String) mqttConfigMap.get("subTopic"));
-        this.mqttConfig.setSubQos((Integer) mqttConfigMap.get("subQos"));
+        YamlConfig.mqttConfig.setSubTopic((String) mqttConfigMap.get("subTopic"));
+        YamlConfig.mqttConfig.setSubQos((Integer) mqttConfigMap.get("subQos"));
         // 发布参数
-        this.mqttConfig.setPubTopic((String) mqttConfigMap.get("pubTopic"));
-        this.mqttConfig.setPubQos((Integer) mqttConfigMap.get("pubQos"));
+        YamlConfig.mqttConfig.setPubTopic((String) mqttConfigMap.get("pubTopic"));
+        YamlConfig.mqttConfig.setPubQos((Integer) mqttConfigMap.get("pubQos"));
     }
 
     private void readDbConfig(Map<String, Object> dbConfigMap) {
-        this.generalConfig.setDb_url((String) dbConfigMap.get("url"));
-        this.generalConfig.setDb_name((String) dbConfigMap.get("dbName"));
-        this.generalConfig.setDb_table((String) dbConfigMap.get("dbTable"));
-        this.generalConfig.setDb_user((String) dbConfigMap.get("user"));
-        this.generalConfig.setDb_password((String) dbConfigMap.get("password"));
+        YamlConfig.generalConfig.setDb_url((String) dbConfigMap.get("url"));
+        YamlConfig.generalConfig.setDb_name((String) dbConfigMap.get("dbName"));
+        YamlConfig.generalConfig.setDb_table((String) dbConfigMap.get("dbTable"));
+        YamlConfig.generalConfig.setDb_user((String) dbConfigMap.get("user"));
+        YamlConfig.generalConfig.setDb_password((String) dbConfigMap.get("password"));
     }
 
     private void readPollingConfig(Map<String, Object> pollingConfigMap) {
-        this.generalConfig.setKeepAliveIntervalMs((int) pollingConfigMap.get("keepAliveIntervalMs"));
-        this.generalConfig.setCollectIntervalMs((int) pollingConfigMap.get("collectIntervalMs"));
+        YamlConfig.generalConfig.setKeepAliveIntervalMs((int) pollingConfigMap.get("keepAliveIntervalMs"));
+        YamlConfig.generalConfig.setCollectIntervalMs((int) pollingConfigMap.get("collectIntervalMs"));
     }
 
     public static long extractNumber(String input) throws NumberFormatException {

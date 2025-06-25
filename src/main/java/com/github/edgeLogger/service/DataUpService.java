@@ -25,12 +25,10 @@ public class DataUpService {
 
     // 基础服务客户端，如果想复用连接，就把Client传给Wrapper，如果不复用，如让各自新建，就不传
     private final MqttClient mqttClient;
-    private final YamlConfig yamlConfig;
 
     ExecutorService executor = Executors.newCachedThreadPool(); // 线程池
 
-    public DataUpService(YamlConfig yamlConfig) throws MqttException {
-        this.yamlConfig = yamlConfig;
+    public DataUpService() throws MqttException {
         // 尝试连接plc
         if (!connectPLC()) {
             throw new RuntimeException("PLC连接会话初始化失败");
@@ -40,17 +38,17 @@ public class DataUpService {
         // MQTT客户端初始化
         mqttClient = new MqttClient();
         mqttClient.buildMqttSession(
-                yamlConfig.mqttConfig.getBroker(),
-                yamlConfig.mqttConfig.getClientId(),
-                yamlConfig.mqttConfig.getUsername(),
-                yamlConfig.mqttConfig.getPassword(),
-                yamlConfig.mqttConfig.isCleanStart(),
-                yamlConfig.mqttConfig.getKeepAlive(),
-                yamlConfig.mqttConfig.getTimeout(),
-                yamlConfig.mqttConfig.isAutoReconnect()
+                YamlConfig.mqttConfig.getBroker(),
+                YamlConfig.mqttConfig.getClientId(),
+                YamlConfig.mqttConfig.getUsername(),
+                YamlConfig.mqttConfig.getPassword(),
+                YamlConfig.mqttConfig.isCleanStart(),
+                YamlConfig.mqttConfig.getKeepAlive(),
+                YamlConfig.mqttConfig.getTimeout(),
+                YamlConfig.mqttConfig.isAutoReconnect()
         );
         // 初始化订阅器, 并订阅主题
-        new MqttSubscriber(mqttClient.getMqttSession()).subscribe(yamlConfig.mqttConfig.getSubTopic(), yamlConfig.mqttConfig.getSubQos());
+        new MqttSubscriber(mqttClient.getMqttSession()).subscribe(YamlConfig.mqttConfig.getSubTopic(), YamlConfig.mqttConfig.getSubQos());
     }
 
     public void startService() {
@@ -72,8 +70,8 @@ public class DataUpService {
 
     // 生产者（采集）线程，每周期往缓冲区存一次
     public void startCollect() {
-        long collectIntervalMs = yamlConfig.generalConfig.getCollectIntervalMs();
-        long keepAliveIntervalMs = yamlConfig.generalConfig.getKeepAliveIntervalMs();
+        long collectIntervalMs = YamlConfig.generalConfig.getCollectIntervalMs();
+        long keepAliveIntervalMs = YamlConfig.generalConfig.getKeepAliveIntervalMs();
 
         logger.info("开始轮询PLC");
         Object connectionLock = new Object();
@@ -85,8 +83,8 @@ public class DataUpService {
             while (producerRunning.get()) {
                 try {
                     long start = System.currentTimeMillis();
-                    CountDownLatch latch = new CountDownLatch(yamlConfig.plcConfigs.size());
-                    yamlConfig.plcConfigs.forEach(
+                    CountDownLatch latch = new CountDownLatch(YamlConfig.plcConfigs.size());
+                    YamlConfig.plcConfigs.forEach(
                             (plcConfig) -> executor.submit(new PlcReaderTask(plcConfig, latch))
                     );
                     // 添加关闭钩子（安全终止线程）
@@ -123,9 +121,9 @@ public class DataUpService {
                     long start = System.currentTimeMillis();
                     String packedData = packData(dataWithMetadata);
                     // 发给broker
-                    mqttPublisher.publish(packedData.getBytes(), yamlConfig.mqttConfig.getPubTopic(), yamlConfig.mqttConfig.getPubQos());
+                    mqttPublisher.publish(packedData.getBytes(), YamlConfig.mqttConfig.getPubTopic(), YamlConfig.mqttConfig.getPubQos());
                     long duration = System.currentTimeMillis() - start;
-                    logger.info("封装和发布完成，耗时: {} 毫秒 Topic: {}", duration, yamlConfig.mqttConfig.getPubTopic());
+                    logger.info("封装和发布完成，耗时: {} 毫秒 Topic: {}", duration, YamlConfig.mqttConfig.getPubTopic());
                 } catch (InterruptedException | JsonProcessingException e) {
                     logger.info("Consumer interrupted");
                     consumerRunning.set(false);
@@ -140,7 +138,7 @@ public class DataUpService {
     /**
      * 将从PLC采集的数据包装成json
      *
-     * @param input
+     * @param input 输入
      * @return 封装格式如下:
      */
     public String packData(DataWithMetadata input) throws JsonProcessingException {
@@ -149,7 +147,7 @@ public class DataUpService {
         }
 
         // 构建目标json数据结构
-        Map<String, Object> jsonResult = JsonConverter.convert(input.data(), input.metadata(), yamlConfig.generalConfig.getGatewayId(), yamlConfig.generalConfig.getIp());
+        Map<String, Object> jsonResult = JsonConverter.convert(input.data(), input.metadata(), YamlConfig.generalConfig.getGatewayId(), YamlConfig.generalConfig.getIp());
 
         // JSON序列化输出
         return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(jsonResult);

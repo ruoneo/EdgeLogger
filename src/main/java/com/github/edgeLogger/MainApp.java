@@ -18,7 +18,7 @@ public class MainApp {
             yamlConfig.setHotReload(false);
 
             // 服务初始化
-            DataUpService dataService = new DataUpService(yamlConfig);
+            DataUpService dataService = new DataUpService();
             logger.info("数据上行服务初始化完成");
             dataService.startService();
             logger.info("数据上行服务已启动");
