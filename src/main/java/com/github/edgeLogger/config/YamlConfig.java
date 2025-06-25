@@ -18,12 +18,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class YamlConfig {
-    public static final Logger LOGGER = LoggerFactory.getLogger("YamlConfigLoader.class");
+    public static final Logger logger = LoggerFactory.getLogger("YamlConfigLoader.class");
 
     private final Path configPath;
-    public GeneralConfig generalConfig = new GeneralConfig();
-    public MqttConfig mqttConfig = new MqttConfig();
-    public final ArrayList<PlcConfig> plcConfigs = new ArrayList<>();
+    public static GeneralConfig generalConfig = new GeneralConfig();
+    public static MqttConfig mqttConfig = new MqttConfig();
+    public static final ArrayList<PlcConfig> plcConfigs = new ArrayList<>();
     // 初始化缓冲区，容量为50
     public static final BlockingQueue<DataWithMetadata> blockingQueue = new ArrayBlockingQueue<>(50);
 
@@ -55,6 +55,10 @@ public class YamlConfig {
         } catch (Exception e) {
             throw new RuntimeException("加载配置失败", e);
         }
+    }
+
+    public static GeneralConfig getGeneralConfig(){
+        return generalConfig;
     }
 
     private void readGeneralConfig(Map<String, Object> generalConfigMap) {
@@ -136,6 +140,8 @@ public class YamlConfig {
 
     private void readDbConfig(Map<String, Object> dbConfigMap) {
         this.generalConfig.setDb_url((String) dbConfigMap.get("url"));
+        this.generalConfig.setDb_name((String) dbConfigMap.get("dbName"));
+        this.generalConfig.setDb_table((String) dbConfigMap.get("dbTable"));
         this.generalConfig.setDb_user((String) dbConfigMap.get("user"));
         this.generalConfig.setDb_password((String) dbConfigMap.get("password"));
     }

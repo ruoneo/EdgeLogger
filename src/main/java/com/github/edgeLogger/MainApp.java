@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class MainApp {
     public static final Logger logger = LoggerFactory.getLogger("MainApp.class");
-    private static final String CONFIG_PATH = "config/config.yaml";
+    private static final String CONFIG_PATH = "config.yaml";
 
     public static void main(String[] args) {
         try {

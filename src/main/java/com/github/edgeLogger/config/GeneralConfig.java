@@ -11,6 +11,8 @@ public class GeneralConfig {
 
     // db配置
     private String db_url;
+    private String db_name;
+    private String db_table;
     private String db_user;
     private String db_password;
 
@@ -76,5 +78,21 @@ public class GeneralConfig {
 
     public void setDb_user(String db_user) {
         this.db_user = db_user;
+    }
+
+    public String getDb_name() {
+        return db_name;
+    }
+
+    public void setDb_name(String db_name) {
+        this.db_name = db_name;
+    }
+
+    public String getDb_table() {
+        return db_table;
+    }
+
+    public void setDb_table(String db_table) {
+        this.db_table = db_table;
     }
 }

@@ -1,5 +1,6 @@
 package com.github.edgeLogger.persistence;
 
+import com.github.edgeLogger.config.YamlConfig;
 import com.github.edgeLogger.plc.DataTimeEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,16 +13,17 @@ import java.time.format.DateTimeFormatter;
 public class PowerDataInserter {
     public static final Logger LOGGER = LoggerFactory.getLogger("PowerDataInserter.class");
 
-    // 数据库连接配置
-    private static final String DB_URL = "jdbc:mysql://172.18.79.100:3306/powerdb";
-    private static final String DB_USER = "collector";
-    private static final String DB_PASSWORD = "collector";
-
     public static void putPowerData(Map<String, DataTimeEntry> input, boolean pubStatus) {
+        // 数据库连接配置
+        final String DB_URL = "%s/%s".formatted(YamlConfig.getGeneralConfig().getDb_url(), YamlConfig.getGeneralConfig().getDb_name());
+        final String DB_TABLE = "%s".formatted(YamlConfig.getGeneralConfig().getDb_table());
+        final String DB_USER = "%s".formatted(YamlConfig.getGeneralConfig().getDb_user());
+        final String DB_PASSWORD = "%s".formatted(YamlConfig.getGeneralConfig().getDb_password());
+
         // 使用try-with-resources确保资源关闭
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // SQL插入语句
-            String sql = "INSERT INTO powerData ("
+            String sql = "INSERT INTO %s (".formatted(DB_TABLE)
                     + "device_id, data_time, pub_status,"
                     + "voltage1, voltage2, voltage3, voltage4, voltage5, voltage6, "
                     + "current1, current2, current3, "
@@ -86,7 +88,7 @@ public class PowerDataInserter {
                     // 执行插入
                     pstmt.executeUpdate();
                 }
-                LOGGER.info("成功插入 {} 条数据", input.size());
+                LOGGER.info("成功插入 {} 条 {} 数据", input.size(), pubStatus ? "新" : "旧");
             }
         } catch (SQLException e) {
             LOGGER.debug("数据库操作错误: {}", e.getMessage());

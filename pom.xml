@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.byd</groupId>
+    <groupId>org.github</groupId>
     <artifactId>EdgeLogger</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -13,7 +13,7 @@
         <java.version>21</java.version>
     </properties>
 
-    <name>DataCollector</name>
+    <name>EdgeLogger</name>
     <url>http://maven.apache.org</url>
 
     <build>
@@ -59,7 +59,7 @@
                             <goal>launch4j</goal>
                         </goals>
                         <configuration>
-                            <headerType>console</headerType> <!-- 或 console -->
+                            <headerType>console</headerType>
                             <errTitle>App Error</errTitle>
                             <outfile>exe/bin/${project.name}-3-3-12.exe</outfile>
                             <jar>${project.build.directory}/${project.name}-jar-with-dependencies.jar</jar>
