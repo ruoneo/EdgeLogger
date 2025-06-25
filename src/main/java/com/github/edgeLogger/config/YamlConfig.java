@@ -40,14 +40,17 @@ public class YamlConfig {
             Map<String, Object> configMap = yaml.load(inputStream);
 
             // 加载generalConfig
+            @SuppressWarnings("unchecked")
             Map<String, Object> generalConfigMap = (Map<String, Object>) configMap.get("general");
             this.readGeneralConfig(generalConfigMap);
 
             // 加载MTQQ配置
+            @SuppressWarnings("unchecked")
             Map<String, Object> mqttConfigMap = (Map<String, Object>) configMap.get("mqtt");
             this.readMqttConfig(mqttConfigMap);
 
             // 加载PLC配置
+            @SuppressWarnings("unchecked")
             ArrayList<Object> plcLst = (ArrayList<Object>) configMap.get("plc");
             this.readPlcConfig(plcLst);
 
@@ -67,9 +70,11 @@ public class YamlConfig {
         this.generalConfig.setIp((String) generalConfigMap.get("ipAddress"));
         this.generalConfig.setAlias((String) generalConfigMap.get("alias"));
         // 加载采集策略配置
+        @SuppressWarnings("unchecked")
         Map<String, Object> pollingConfigMap = (Map<String, Object>) generalConfigMap.get("polling");
         this.readPollingConfig(pollingConfigMap);
         // 加载采集策略配置
+        @SuppressWarnings("unchecked")
         Map<String, Object> dbConfigMap = (Map<String, Object>) generalConfigMap.get("db");
         this.readDbConfig(dbConfigMap);
     }
@@ -91,6 +96,7 @@ public class YamlConfig {
 
     private List<RegisterConfig> readRegisterConfigs(Object plc) {
         // 处理寄存器
+        @SuppressWarnings("unchecked")
         ArrayList<Object> registers = (ArrayList<Object>) ((LinkedHashMap<?, ?>) plc).get("registers");
         ArrayList<RegisterConfig> registerConfigs = new ArrayList<>();
         for (Object register : registers) {
@@ -105,6 +111,7 @@ public class YamlConfig {
     }
 
     private List<TagAddressConfig> readTagAddressConfigs(Object register) {
+        @SuppressWarnings("unchecked")
         ArrayList<Object> tagAddresses = (ArrayList<Object>) ((LinkedHashMap<?, ?>) register).get("tagAddresses");
         ArrayList<TagAddressConfig> tagAddressConfigs = new ArrayList<>();
         for (Object tagAddress : tagAddresses) {
