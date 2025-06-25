@@ -158,24 +158,12 @@ public class YamlConfig {
         YamlConfig.generalConfig.setCollectIntervalMs((int) pollingConfigMap.get("collectIntervalMs"));
     }
 
-    public static long extractNumber(String input) throws NumberFormatException {
-        Pattern pattern = Pattern.compile("^\\d+");
-        Matcher matcher = pattern.matcher(input);
-
-        if (matcher.find()) {
-            String numberStr = matcher.group();
-            return Long.parseLong(numberStr);
-        } else {
-            throw new NumberFormatException("字符串中没有数字部分。");
-        }
-    }
-
     public Path getConfigPath() {
         return configPath;
     }
 
     public void setHotReload(boolean flag) {
-        // LOGGER.info("配置热重载：{}", flag);
+        logger.info("配置热重载：{}", flag);
     }
 
     public long getLastReloadTime() {

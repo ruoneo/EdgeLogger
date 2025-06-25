@@ -1,7 +1,6 @@
 package com.github.edgeLogger.service;
 
 import com.github.edgeLogger.config.YamlConfig;
-import com.github.edgeLogger.config.*;
 import com.github.edgeLogger.mqtt.MqttClient;
 import com.github.edgeLogger.mqtt.MqttPublisher;
 import com.github.edgeLogger.mqtt.MqttSubscriber;
@@ -71,10 +70,9 @@ public class DataUpService {
     // 生产者（采集）线程，每周期往缓冲区存一次
     public void startCollect() {
         long collectIntervalMs = YamlConfig.generalConfig.getCollectIntervalMs();
-        long keepAliveIntervalMs = YamlConfig.generalConfig.getKeepAliveIntervalMs();
+        // long keepAliveIntervalMs = YamlConfig.generalConfig.getKeepAliveIntervalMs();
 
         logger.info("开始轮询PLC");
-        Object connectionLock = new Object();
         // 使用AtomicBoolean控制线程启停
         AtomicBoolean producerRunning = new AtomicBoolean(true);
 
