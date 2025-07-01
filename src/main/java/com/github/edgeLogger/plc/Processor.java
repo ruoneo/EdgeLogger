@@ -66,7 +66,7 @@ public class Processor {
                     logger.error("Error[{}]: {}", tagName, response.getResponseCode(tagName).name());
                 }
             }
-            logger.info("[PlcID: {}] 采集完成，耗时: {}", plcConfig.getPlcID(), System.currentTimeMillis() - start);
+            logger.info("[PlcID: {}] 采集完成，耗时: {} 毫秒", plcConfig.getPlcID(), System.currentTimeMillis() - start);
             return registerValue;
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -91,8 +91,10 @@ public class DataUpService {
                         logger.info("收到关闭信号，终止所有PLC连接");
                     }));
                     latch.await();
-                    logger.info("所有PLC采集线程执行完毕");
-                    TimeUnit.MILLISECONDS.sleep(collectIntervalMs - (System.currentTimeMillis() - start));
+                    logger.info("所有PLC采集线程执行完毕，本次采集任务执行完毕");
+                    long l = collectIntervalMs - (System.currentTimeMillis() - start);
+                    logger.info("预计{}:{}秒后开始下一次采集任务", l / 60, l % 60);
+                    TimeUnit.MILLISECONDS.sleep(l);
                 } catch (InterruptedException e) {
                     logger.error("PLC轮询线程被中断", e);
                     producerRunning.set(false);

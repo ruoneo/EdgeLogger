@@ -4,6 +4,18 @@
         CONSOLE ：表示当前的日志信息是可以输出到控制台的。
     -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 第一层过滤：接受业务日志（如包名为com.yourproject） -->
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <expression>logger.startsWith("com.github.edgeLogger")</expression>
+            </evaluator>
+            <onMatch>ACCEPT</onMatch> <!-- 允许输出 -->
+            <onMismatch>NEUTRAL</onMismatch> <!-- 进入下一过滤器 -->
+        </filter>
+        <!-- 第二层过滤：第三方日志仅输出WARN及以上 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>OFF</level>
+        </filter>
         <!--输出流对象 默认 System.out 改为 System.err-->
         <target>System.out</target>
         <encoder>
