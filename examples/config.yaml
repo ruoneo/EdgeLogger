@@ -1,0 +1,100 @@
+# config.yaml
+# 基础配置
+general:
+  gatewayId: example
+  ipAddress: 10.10.10.100
+  alias: alias-name
+
+  # 采集轮询策略
+  polling:
+    keepAliveIntervalMs: 3000
+    collectIntervalMs: 600000    # 此配置文件及软件只适用于采集频率低于3min/次的情况.
+
+  # 持久化策略
+  db:
+    url: jdbc:mysql://localhost:3306
+    dbName: powerdb
+    dbTable: powerData
+    user: collector
+    password: collector
+
+# MQTT配置
+mqtt:
+  broker: tcp://localhost:1883
+  clientId: clientID
+  qos: 1
+
+  username: mqtt1
+  password: 123123
+  cleanStart: true
+  keepAlive: 10
+  timeout: 300
+  autoReconnect: true
+  msgExample: KFC-CRAZY-THURSDAY-VWO50
+
+  subTopic: device/electric/down/
+  subQos: 1
+
+  pubTopic: energy/electric/up
+  pubQos: 1
+
+# PLC连接配置
+plc:
+  - ip: 10.10.10.1
+    port: 102
+    timeout: 5000
+    rack: 0
+    slot: 1
+    plcID: plcId-1
+    registers:
+      - deviceNumber: 1
+        deviceId: deviceId-01     # 寄存器映射电表的配置，每个寄存器对应一个电表，设备ID为电表ID
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD94:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: deviceId-02
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 3
+        deviceId: deviceId-03
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB12.DBD92:REAL[1]"
+            dataType: float
+
+  - ip: 10.10.10.2
+    port: 102
+    timeout: 5000
+    rack: 0
+    slot: 1
+    plcID: plcId-2
+    registers:
+      - deviceNumber: 1
+        deviceId: deviceId-46    # 寄存器映射电表的配置，每个寄存器对应一个电表，设备ID为电表ID
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB10.DBD92:REAL[1]"
+            dataType: float
+
+      - deviceNumber: 2
+        deviceId: deviceId-14
+        alias: three_phase_electric_meter
+        tagAddresses:
+          - tagName: forward_active_energy
+            tagAddress: "%DB11.DBD92:REAL[1]"
+            dataType: float
+
+
