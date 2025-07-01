@@ -19,7 +19,7 @@ import java.math.RoundingMode;
 public class Processor {
     public static final Logger logger = LoggerFactory.getLogger("Processor.class");
 
-    public static Map<String, DataTimeEntry> readPlc(PlcConfig plcConfig) throws Exception {
+    public static Map<String, DataTimeEntry> readPlc(PlcConfig plcConfig) {
         String connectionString = String.format("s7://%s?remote-rack=%d&remote-slot=%d&controller-type=S7_1200" +
                 "&tcp.keep-alive=true&tcp.no-delay=false", plcConfig.getIp(), plcConfig.getRack(), plcConfig.getSlot());
 
@@ -34,10 +34,8 @@ public class Processor {
 
             PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
             plcConfig.getRegisterConfigs().forEach(
-                    (registerConfig) -> {
-                        registerConfig.getTagAddresses().forEach((tagAddressConfig) ->
-                                builder.addTagAddress(registerConfig.getDeviceID() + "->" + tagAddressConfig.getTagName(), tagAddressConfig.getTagAddress()));
-                    }
+                    (registerConfig) -> registerConfig.getTagAddresses().forEach((tagAddressConfig) ->
+                            builder.addTagAddress(registerConfig.getDeviceID() + "->" + tagAddressConfig.getTagName(), tagAddressConfig.getTagAddress()))
             );
             PlcReadRequest readRequest = builder.build();
 
