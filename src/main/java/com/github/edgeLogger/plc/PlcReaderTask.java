@@ -34,12 +34,12 @@ public class PlcReaderTask implements Runnable {
             // 一个PLC采集完成，值放入
             Map<String, DataTimeEntry> registerValueDiff = MapCompare.isEquals(registerValue, plcConfig.getLastRegisterValue());
             MapDifference<String, DataTimeEntry> mapDifference = Maps.difference(registerValueDiff, registerValue);
-            PowerDataInserter.putPowerData(mapDifference.entriesOnlyOnRight(), false);
+            PowerDataInserter.putPowerData(mapDifference.entriesOnlyOnRight(), false, plcConfig);
             if (registerValueDiff.isEmpty()) {
                 logger.info("PlcID:{} 数据无变化，跳过队列存储", plcConfig.getPlcID());
             } else {
                 // 把registerValue写入数据库
-                PowerDataInserter.putPowerData(registerValueDiff, true);
+                PowerDataInserter.putPowerData(registerValueDiff, true, plcConfig);
                 putQueue(registerValueDiff);
                 plcConfig.setLastRegisterValue(registerValue);
                 logger.info("PlcID:{} 差异数据已存入队列", plcConfig.getPlcID());
@@ -53,6 +53,6 @@ public class PlcReaderTask implements Runnable {
     }
 
     private void putQueue(Map<String, DataTimeEntry> registerValueDiff) throws InterruptedException {
-        blockingQueue.put(new DataWithMetadata(registerValueDiff, Map.of("plcID", plcConfig.getPlcID(),"ip", plcConfig.getIp())));
+        blockingQueue.put(new DataWithMetadata(registerValueDiff, Map.of("plcID", plcConfig.getPlcID(), "ip", plcConfig.getIp())));
     }
 }

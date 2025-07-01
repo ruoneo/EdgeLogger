@@ -1,5 +1,6 @@
 package com.github.edgeLogger.persistence;
 
+import com.github.edgeLogger.config.PlcConfig;
 import com.github.edgeLogger.config.YamlConfig;
 import com.github.edgeLogger.plc.DataTimeEntry;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class PowerDataInserter {
     public static final Logger LOGGER = LoggerFactory.getLogger("PowerDataInserter.class");
 
-    public static void putPowerData(Map<String, DataTimeEntry> input, boolean pubStatus) {
+    public static void putPowerData(Map<String, DataTimeEntry> input, boolean pubStatus, PlcConfig plcConfig) {
         // 数据库连接配置
         final String DB_URL = "%s/%s".formatted(YamlConfig.getGeneralConfig().getDb_url(), YamlConfig.getGeneralConfig().getDb_name());
         final String DB_TABLE = "%s".formatted(YamlConfig.getGeneralConfig().getDb_table());
@@ -88,7 +89,7 @@ public class PowerDataInserter {
                     // 执行插入
                     pstmt.executeUpdate();
                 }
-                LOGGER.info("成功插入 {} 条 {} 数据", input.size(), pubStatus ? "新" : "旧");
+                LOGGER.info("成功插入 {} 条来自 [PlcID：{}] 的 {} 数据", input.size(), plcConfig.getPlcID(), pubStatus ? "[新]" : "[旧]");
             }
         } catch (SQLException e) {
             LOGGER.debug("数据库操作错误: {}", e.getMessage());

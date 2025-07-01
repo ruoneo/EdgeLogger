@@ -121,7 +121,7 @@ public class DataUpService {
                     // 发给broker
                     mqttPublisher.publish(packedData.getBytes(), YamlConfig.mqttConfig.getPubTopic(), YamlConfig.mqttConfig.getPubQos());
                     long duration = System.currentTimeMillis() - start;
-                    logger.info("封装和发布完成，耗时: {} 毫秒 Topic: {}", duration, YamlConfig.mqttConfig.getPubTopic());
+                    logger.info("[PlcId: {}] 封装和发布完成，耗时: {} 毫秒 Topic: {}", dataWithMetadata.metadata().get("plcID"),duration, YamlConfig.mqttConfig.getPubTopic());
                 } catch (InterruptedException | JsonProcessingException e) {
                     logger.info("Consumer interrupted");
                     consumerRunning.set(false);
