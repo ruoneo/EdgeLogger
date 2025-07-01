@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Processor {
     public static final Logger logger = LoggerFactory.getLogger("Processor.class");
@@ -49,7 +51,9 @@ public class Processor {
                         logger.info("Value[{}]: {}", tagName, response.getDouble(tagName));
                         String tagNameHead = tagName.split("->")[0];
                         // 封装数据，目前一个块只有一个地址需要采集，所以可以这样，如果一个块有多个地址需要采集，就不可以这样封装（值会相互覆盖）。
-                        double[] doubles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, response.getDouble(tagName), 0, 0, 0};
+                        double[] doubles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                new BigDecimal(Double.toString(response.getDouble(tagName))).setScale(2, RoundingMode.HALF_UP).doubleValue(), 0, 0, 0};
                         DataTimeEntry value = new DataTimeEntry(doubles, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")));
                         registerValue.put(tagNameHead, value);
                     } else {
