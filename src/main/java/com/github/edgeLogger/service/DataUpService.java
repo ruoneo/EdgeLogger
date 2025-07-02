@@ -93,8 +93,9 @@ public class DataUpService {
                     }));
                     latch.await();
                     logger.info("所有PLC采集线程执行完毕，本次采集任务执行完毕");
+                    TimeUnit.MILLISECONDS.sleep(3000);
                     Duration duration = Duration.ofMillis(collectIntervalMs - (System.currentTimeMillis() - start));
-                    logger.info("预计{}:{}秒后开始下一次采集任务", duration.toMinutes(), duration.toSecondsPart());
+                    logger.info("预计 {}:{}秒后开始下一次采集任务", duration.toMinutes(), duration.toSecondsPart());
                     TimeUnit.MILLISECONDS.sleep(collectIntervalMs - (System.currentTimeMillis() - start));
                 } catch (InterruptedException e) {
                     logger.error("PLC轮询线程被中断", e);
