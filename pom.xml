@@ -61,7 +61,7 @@
                         <configuration>
                             <headerType>console</headerType>
                             <errTitle>App Error</errTitle>
-                            <outfile>exe/bin/${project.name}-3-3-12.exe</outfile>
+                            <outfile>${project.name}.exe</outfile>
                             <jar>${project.build.directory}/${project.name}-jar-with-dependencies.jar</jar>
                             <classPath>
                                 <mainClass>com.github.edgeLogger.MainApp</mainClass>

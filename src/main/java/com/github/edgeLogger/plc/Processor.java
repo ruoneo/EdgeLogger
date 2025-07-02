@@ -45,13 +45,14 @@ public class Processor {
                 if (response.getResponseCode(tagName) == PlcResponseCode.OK) {
                     int numValues = response.getNumberOfValues(tagName);
                     if (numValues == 1) {
+                        double tagVal = new BigDecimal(Double.toString(response.getDouble(tagName))).setScale(2, RoundingMode.HALF_UP).doubleValue();
                         // 目前的话都是一个标签一个值
-                        logger.info("Value[{}]: {}", tagName, response.getDouble(tagName));
+                        logger.info("Value[{}]: {}", tagName, tagVal);
                         String tagNameHead = tagName.split("->")[0];
                         // 封装数据，目前一个块只有一个地址需要采集，所以可以这样，如果一个块有多个地址需要采集，就不可以这样封装（值会相互覆盖）。
                         double[] doubles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                new BigDecimal(Double.toString(response.getDouble(tagName))).setScale(2, RoundingMode.HALF_UP).doubleValue(), 0, 0, 0};
+                                tagVal, 0, 0, 0};
                         DataTimeEntry value = new DataTimeEntry(doubles, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")));
                         registerValue.put(tagNameHead, value);
                     } else {

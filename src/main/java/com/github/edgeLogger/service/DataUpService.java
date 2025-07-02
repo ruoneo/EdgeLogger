@@ -13,6 +13,7 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -92,9 +93,9 @@ public class DataUpService {
                     }));
                     latch.await();
                     logger.info("所有PLC采集线程执行完毕，本次采集任务执行完毕");
-                    long l = collectIntervalMs - (System.currentTimeMillis() - start);
-                    logger.info("预计{}:{}秒后开始下一次采集任务", l / 60, l % 60);
-                    TimeUnit.MILLISECONDS.sleep(l);
+                    Duration duration = Duration.ofMillis(collectIntervalMs - (System.currentTimeMillis() - start));
+                    logger.info("预计{}:{}秒后开始下一次采集任务", duration.toMinutes(), duration.toSecondsPart());
+                    TimeUnit.MILLISECONDS.sleep(collectIntervalMs - (System.currentTimeMillis() - start));
                 } catch (InterruptedException e) {
                     logger.error("PLC轮询线程被中断", e);
                     producerRunning.set(false);
@@ -123,7 +124,7 @@ public class DataUpService {
                     // 发给broker
                     mqttPublisher.publish(packedData.getBytes(), YamlConfig.mqttConfig.getPubTopic(), YamlConfig.mqttConfig.getPubQos());
                     long duration = System.currentTimeMillis() - start;
-                    logger.info("[PlcId: {}] 封装和发布完成，耗时: {} 毫秒 Topic: {}", dataWithMetadata.metadata().get("plcID"),duration, YamlConfig.mqttConfig.getPubTopic());
+                    logger.info("[PlcId: {}] 封装和发布完成，耗时: {} 毫秒 Topic: {}", dataWithMetadata.metadata().get("plcID"), duration, YamlConfig.mqttConfig.getPubTopic());
                 } catch (InterruptedException | JsonProcessingException e) {
                     logger.info("Consumer interrupted");
                     consumerRunning.set(false);

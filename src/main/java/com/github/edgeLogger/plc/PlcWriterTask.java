@@ -1,16 +1,8 @@
 package com.github.edgeLogger.plc;
 
 import com.github.edgeLogger.config.PlcConfig;
-import com.github.edgeLogger.persistence.PowerDataInserter;
-import com.github.edgeLogger.utils.MapCompare;
-import com.google.common.collect.MapDifference;
-import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
-
-import static com.github.edgeLogger.config.YamlConfig.blockingQueue;
 
 // PLC写任务（每个配置独立运行）
 public class PlcWriterTask implements Runnable {
