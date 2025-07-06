@@ -126,7 +126,6 @@ public class YamlConfig {
         // MTQQ客户端配置
         YamlConfig.mqttConfig.setBroker((String) mqttConfigMap.get("broker"));
         YamlConfig.mqttConfig.setClientId((String) mqttConfigMap.get("clientId"));
-        YamlConfig.mqttConfig.setQos((Integer) mqttConfigMap.get("qos"));
         // connect 配置
         YamlConfig.mqttConfig.setUsername((String) mqttConfigMap.get("username"));
         YamlConfig.mqttConfig.setPassword(mqttConfigMap.get("password").toString());
