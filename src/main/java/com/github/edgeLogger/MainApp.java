@@ -16,8 +16,8 @@ public class MainApp {
             logger.info("配置文件加载完成");
             logger.info("采集网关Id：{} IP：{} 采集周期：{}毫秒",YamlConfig.generalConfig.getGatewayId(),YamlConfig.generalConfig.getIp(),YamlConfig.generalConfig.getCollectIntervalMs());
             logger.info("本地数据库URL：{} 数据库名：{} 表名：{}",YamlConfig.generalConfig.getDb_url(),YamlConfig.generalConfig.getDb_name(),YamlConfig.generalConfig.getDb_table());
-            // 开启热重载
-//            yamlConfig.setHotReload(false);
+
+            yamlConfig.setHotReload(false);
 
             // 服务初始化
             DataUpService dataService = new DataUpService();

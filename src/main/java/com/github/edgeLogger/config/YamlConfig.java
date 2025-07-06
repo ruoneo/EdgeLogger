@@ -160,7 +160,7 @@ public class YamlConfig {
     }
 
     public void setHotReload(boolean flag) {
-        logger.info("配置热重载：{}", flag);
+        // logger.info("配置热重载：{}", flag);
     }
 
     public long getLastReloadTime() {

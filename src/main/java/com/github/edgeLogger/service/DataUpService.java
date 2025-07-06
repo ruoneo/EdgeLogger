@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.edgeLogger.utils.TimeCalculator;
 import com.github.edgeLogger.utils.Utils;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

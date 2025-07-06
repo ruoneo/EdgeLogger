@@ -4,7 +4,6 @@ import com.github.edgeLogger.utils.Utils;
 import org.junit.Test;
 
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainTest {
     @Test
