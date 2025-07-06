@@ -4,7 +4,6 @@ public class MqttConfig {
     // 客户端配置
     private String broker;
     private String clientId;
-    private int qos;
 
     // connect 参数
     private String username;
@@ -37,14 +36,6 @@ public class MqttConfig {
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public int getQos() {
-        return qos;
-    }
-
-    public void setQos(int qos) {
-        this.qos = qos;
     }
 
     public String getUsername() {
