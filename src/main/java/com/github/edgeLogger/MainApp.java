@@ -23,7 +23,6 @@ public class MainApp {
             DataUpService dataService = new DataUpService();
             logger.info("数据上行服务初始化完成");
             dataService.startService();
-            logger.info("数据上行服务已启动");
         } catch (Exception e) {
             logger.error("启动失败", e);
             System.exit(1);
