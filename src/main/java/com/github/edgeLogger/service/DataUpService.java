@@ -9,7 +9,9 @@ import com.github.edgeLogger.plc.PlcReaderTask;
 import com.github.edgeLogger.utils.JsonConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.edgeLogger.utils.TimeCalculator;
 import com.github.edgeLogger.utils.Utils;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +24,20 @@ import static com.github.edgeLogger.config.YamlConfig.blockingQueue;
 
 public class DataUpService {
     public static final Logger logger = LoggerFactory.getLogger("DataUpService.class");
+    public static final ScheduledExecutorService scheduleExecutor = Executors.newSingleThreadScheduledExecutor();
 
     // 基础服务客户端，如果想复用连接，就把Client传给Wrapper，如果不复用，如让各自新建，就不传
     private final MqttClient mqttClient;
 
-    ExecutorService executor = Executors.newCachedThreadPool(); // 线程池
+    ExecutorService executor = new ThreadPoolExecutor(
+            YamlConfig.plcConfigs.size(),
+            YamlConfig.plcConfigs.size() * 2,
+            60,
+            TimeUnit.SECONDS,
+            new ArrayBlockingQueue<>(1000),
+            Executors.defaultThreadFactory(),
+            new ThreadPoolExecutor.AbortPolicy()
+    );
 
     public DataUpService() throws MqttException {
         // 尝试连接plc
@@ -65,6 +76,9 @@ public class DataUpService {
             } catch (MqttException e) {
                 throw new RuntimeException(e);
             }
+            executor.shutdownNow(); // 发送中断信号
+            scheduleExecutor.shutdownNow();  // 关闭线程池
+            logger.info("收到关闭信号，终止所有PLC连接和时钟线程");
         }));
     }
 
@@ -73,7 +87,8 @@ public class DataUpService {
         long collectIntervalMs = YamlConfig.generalConfig.getCollectIntervalMs();
         // long keepAliveIntervalMs = YamlConfig.generalConfig.getKeepAliveIntervalMs();
 
-        logger.info("开始轮询PLC");
+        logger.info("数据上行服务已启动，开始轮询PLC");
+
         // 使用AtomicBoolean控制线程启停
         AtomicBoolean producerRunning = new AtomicBoolean(true);
 
@@ -86,16 +101,12 @@ public class DataUpService {
                     YamlConfig.plcConfigs.forEach(
                             (plcConfig) -> executor.submit(new PlcReaderTask(plcConfig, latch))
                     );
-                    // 添加关闭钩子（安全终止线程）
-                    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                        executor.shutdownNow(); // 发送中断信号
-                        logger.info("收到关闭信号，终止所有PLC连接");
-                    }));
                     latch.await();
                     logger.info("所有PLC采集线程执行完毕，本次采集任务执行完毕");
-                    TimeUnit.MILLISECONDS.sleep(3000);
-                    Utils.displayWaitingInformation(collectIntervalMs - (System.currentTimeMillis() - start));
-                    TimeUnit.MILLISECONDS.sleep(collectIntervalMs - (System.currentTimeMillis() - start));
+                    TimeUnit.MILLISECONDS.sleep(2000);
+                    logger.info("预计{}开始下一次采集", TimeCalculator.logFutureTime(collectIntervalMs - (System.currentTimeMillis() - start)));
+                    long displayTimeOffset = Utils.displayWaitingInformation(collectIntervalMs - (System.currentTimeMillis() - start) - 1000, scheduleExecutor);// 快1s下一行代码补偿时间, 主线程在此阻塞，直到倒计时结束
+                    TimeUnit.MILLISECONDS.sleep(1000 - displayTimeOffset);
                 } catch (InterruptedException e) {
                     logger.error("PLC轮询线程被中断", e);
                     producerRunning.set(false);
@@ -104,7 +115,7 @@ public class DataUpService {
                 }
             }
         });
-
+        producerThread.setName("producer");
         producerThread.start();
     }
 
@@ -132,6 +143,7 @@ public class DataUpService {
             }
         });
         // 启动线程
+        consumerThread.setName("consumer");
         consumerThread.start();
     }
 
