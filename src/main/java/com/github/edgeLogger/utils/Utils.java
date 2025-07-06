@@ -3,47 +3,45 @@ package com.github.edgeLogger.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static java.lang.Thread.sleep;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Utils {
     public static final Logger logger = LoggerFactory.getLogger("Utils.class");
 
-    public static void displayWaitingInformation(long milliseconds) throws InterruptedException {
-        logger.info("倒计时完成后开始下一次采集");
-        new Thread(() -> {
-            try {
-                sleep(milliseconds % 1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            int totalSeconds = (int) (milliseconds / 1000);
-            while (totalSeconds >= 0) {
-                long start = System.currentTimeMillis();
-                int minutes = totalSeconds / 60;
-                int seconds = totalSeconds % 60;
-                String time = String.format("%02d:%02d", minutes, seconds);
-                System.out.printf("\r预计%s秒后开始下一次采集 ", time);
-                System.out.flush();
-                long l = 1000 - (System.currentTimeMillis() - start);
+    public static long displayWaitingInformation(long milliseconds, ScheduledExecutorService scheduleExecutor) throws ExecutionException, InterruptedException {
+        long start = System.currentTimeMillis();
 
-                try {
-                    sleep(l);
-                    totalSeconds--;
-                } catch (IllegalArgumentException e) {
-                    logger.error("时间差超过1秒", e);
-                    try {
-                        sleep(1000 + l % 1000);
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    totalSeconds -= 1 - (int) l / 1000;
+        CompletableFuture<Void> completionFuture = new CompletableFuture<>();
+        long millisRemainder = milliseconds % 1000;
+        int totalSeconds = (int) (milliseconds / 1000);
 
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+        // 处理不足 1 秒的余数时间
+        scheduleExecutor.schedule(() -> {
+            final AtomicInteger remainingSeconds = new AtomicInteger(totalSeconds);
+            final ScheduledFuture<?>[] futureHolder = new ScheduledFuture[1];
+
+            // 每秒执行一次的任务
+            futureHolder[0] = scheduleExecutor.scheduleAtFixedRate(() -> {
+                if (Thread.currentThread().isInterrupted()) return;
+                int current = remainingSeconds.getAndDecrement();
+                if (current <= 0) {
+                    futureHolder[0].cancel(false);  // 取消任务
+                    System.out.printf("\r预计%s后开始下一次采集 ", String.format("%02d:%02d", 0, 0));
+                    System.out.flush();
+                    logger.info(">>> 下一次采集开始！");
+                    completionFuture.complete(null); // 通知主线程：任务完成
+                    return;
                 }
-            }
 
-            logger.info(">>> 下一次采集开始！");
-        }).start();
+                // 格式化并输出倒计时
+                System.out.printf("\r预计%s后开始下一次采集 ", String.format("%02d:%02d", current / 60, current % 60));
+                System.out.flush();
+            }, 0, 1000, TimeUnit.MILLISECONDS); // 立即开始，间隔 1 秒
+
+        }, millisRemainder, TimeUnit.MILLISECONDS); // 初始延迟为余数时间
+
+        completionFuture.get();
+        return System.currentTimeMillis() - start - milliseconds;
     }
 }
